@@ -203,10 +203,6 @@ class ProviderService implements IProviderService {
 					&& $this->serverVersion->getMajorVersion() < (int)$attributes['min-version']) {
 					continue;
 				}
-				if (array_key_exists('max-version', $attributes)
-					&& $this->serverVersion->getMajorVersion() > (int)$attributes['max-version']) {
-					continue;
-				}
 
 				$provider = $provider['@value'];
 			}
