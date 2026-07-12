@@ -58,3 +58,9 @@ path = ["tests/stubs/stecman_component_**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "none"
 SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["js/jquery-3.7.1.min.js", "js/jquery-3.7.1.min.map"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "OpenJS Foundation and other contributors"
+SPDX-License-Identifier = "MIT"

@@ -261,6 +261,7 @@ class ProviderService implements IProviderService {
 	 */
 	public function addJavascriptAPI() {
 		Util::addStyle(Application::APP_ID, 'fulltextsearch');
+		Util::addScript(Application::APP_ID, 'jquery-3.7.1.min');
 		Util::addScript(Application::APP_ID, 'fulltextsearch.v1.api');
 		Util::addScript(Application::APP_ID, 'fulltextsearch.v1.settings');
 		Util::addScript(Application::APP_ID, 'fulltextsearch.v1.searchbox');

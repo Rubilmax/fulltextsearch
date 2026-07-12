@@ -105,7 +105,11 @@ Navigate.prototype = {
 			var providerId = data[ak[i]]['provider'];
 
 			if (css !== '') {
-				OC.addStyle(providerAppId, css);
+				if (window.OCP && window.OCP.Loader && window.OCP.Loader.loadStylesheet) {
+					window.OCP.Loader.loadStylesheet(providerAppId, css);
+				} else if (window.OC && window.OC.addStyle) {
+					window.OC.addStyle(providerAppId, css);
+				}
 			}
 
 			var li = $('<li>', {class: (nav.options !== undefined) ? 'collapsible open' : ''});
@@ -490,6 +494,5 @@ OCA.FullTextSearch.Navigate = Navigate;
 $(document).ready(function () {
 	OCA.FullTextSearch.navigate = new Navigate();
 });
-
 
 
