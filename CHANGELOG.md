@@ -4,6 +4,14 @@
 -->
 # Changelog
 
+### 34.0.0
+
+- compat nc34 and newer releases
+- fix admin UI without global jQuery
+- fix navigation localization lookup
+- load legacy search UI assets explicitly for Nextcloud 34
+- update static analysis tooling to Nextcloud 34 OCP
+
 ### 32.0.0
 
 - compat nc32
@@ -265,4 +273,3 @@ Command Line Interface:
 ### BETA v0.3.0
 
 - First Beta
-

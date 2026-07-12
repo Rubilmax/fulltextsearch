@@ -3,8 +3,8 @@
 parameters:
 	level: 4
 	phpVersion:
-		min: 80100
-		max: 80400
+		min: 80200
+		max: 80500
 	paths:
 		- lib
 		- templates
@@ -51,4 +51,3 @@ parameters:
 		- tests/stubs/symfony_component_console_formatter_outputformatterstyle.php
 		- tests/stubs/symfony_component_console_formatter_outputformatterinterface.php
 		- tests/stubs/symfony_component_routing_exception_routenotfoundexception.php
-
