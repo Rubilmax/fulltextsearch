@@ -9,6 +9,7 @@ declare(strict_types=1);
 use OCA\FullTextSearch\AppInfo\Application;
 use OCP\Util;
 
+Util::addScript(Application::APP_ID, 'jquery-3.7.1.min');
 Util::addScript(Application::APP_ID, 'navigate');
 Util::addStyle(Application::APP_ID, 'navigate');
 
