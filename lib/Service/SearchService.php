@@ -28,6 +28,8 @@ use OCP\FullTextSearch\Service\ISearchService;
 use OCP\IGroupManager;
 use OCP\IUser;
 use OCP\IUserManager;
+use Psr\Log\LoggerInterface;
+use Throwable;
 
 class SearchService implements ISearchService {
 
@@ -36,6 +38,7 @@ class SearchService implements ISearchService {
 		private IGroupManager $groupManager,
 		private ProviderService $providerService,
 		private PlatformService $platformService,
+		private LoggerInterface $logger,
 	) {
 	}
 
@@ -112,14 +115,29 @@ class SearchService implements ISearchService {
 	): array {
 		$result = [];
 		foreach ($providers as $provider) {
-			$provider->improveSearchRequest($request);
+			try {
+				$provider->improveSearchRequest($request);
+			} catch (Throwable $e) {
+				$this->logger->warning(
+					'Issue while improving search request for Provider: ' . $provider->getId(),
+					['exception' => $e]
+				);
+				continue;
+			}
 
 			$searchResult = new SearchResult($request);
 			$searchResult->setProvider($provider);
 			$searchResult->setPlatform($platform);
 
 			$platform->searchRequest($searchResult, $access);
-			$provider->improveSearchResult($searchResult);
+			try {
+				$provider->improveSearchResult($searchResult);
+			} catch (Throwable $e) {
+				$this->logger->warning(
+					'Issue while improving search result for Provider: ' . $provider->getId(),
+					['exception' => $e]
+				);
+			}
 
 			$result[] = $searchResult;
 		}
