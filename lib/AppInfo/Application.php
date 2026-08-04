@@ -17,6 +17,7 @@ use OCA\FullTextSearch\Search\UnifiedSearchProvider;
 use OCA\FullTextSearch\Service\IndexService;
 use OCA\FullTextSearch\Service\ProviderService;
 use OCA\FullTextSearch\Service\SearchService;
+use OCA\FullTextSearch\Settings\Admin;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -56,6 +57,7 @@ class Application extends App implements IBootstrap {
 		$context->registerCapability(Capabilities::class);
 		$context->registerSearchProvider(UnifiedSearchProvider::class);
 		$context->registerConfigLexicon(ConfigLexicon::class);
+		$context->registerDeclarativeSettings(Admin::class);
 		$this->registerServices($this->getContainer());
 	}
 

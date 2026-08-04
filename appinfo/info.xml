@@ -14,7 +14,7 @@ Core App of the full-text search framework for your Nextcloud.
 
 ]]>
 	</description>
-	<version>34.0.1</version>
+	<version>34.0.2</version>
 	<licence>agpl</licence>
 	<author>Maxence Lange</author>
 	<namespace>FullTextSearch</namespace>
@@ -54,7 +54,6 @@ Core App of the full-text search framework for your Nextcloud.
 	</commands>
 
 	<settings>
-		<admin>OCA\FullTextSearch\Settings\Admin</admin>
 		<admin-section>OCA\FullTextSearch\Settings\AdminSection</admin-section>
 	</settings>
 

@@ -26,13 +26,10 @@ return [
 
 	'routes' => [
 		['name' => 'Navigation#navigate', 'url' => '/', 'verb' => 'GET'],
-		['name' => 'Settings#getSettingsAdmin', 'url' => '/admin/settings', 'verb' => 'GET'],
-		['name' => 'Settings#setSettingsAdmin', 'url' => '/admin/settings', 'verb' => 'POST'],
 		['name' => 'Api#search', 'url' => '/v1/search', 'verb' => 'GET'],
 		['name' => 'Api#searchFromRemote', 'url' => '/v1/remote', 'verb' => 'GET'],
 		['name' => 'Templates#getOptionsPanel', 'url' => '/options/{providerId}/', 'verb' => 'GET'],
 		['name' => 'Templates#getNavigationPanels', 'url' => '/navigation/panels', 'verb' => 'GET']
 	]
 ];
-
 
