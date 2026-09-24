@@ -1,15 +1,20 @@
 { "translations": {
-    "the search returned {total} results in {time} ms" : "haku palautti {total} tulosta ajassa {time} ms",
     "Search" : "Haku",
+    "Full Text Search" : "Kokotekstihaku",
     "Index not found" : "Indeksiä ei löydy",
     "Process timed out" : "Toiminto aikakatkaistiin",
-    "Full Text Search" : "Kokotekstihaku",
     "Full text search" : "Kokotekstihaku",
-    "Search on %s" : "Etsi kohteesta %s",
     "General" : "Yleiset",
     "Search Platform" : "Hakualusta",
-    "Select the app to index content and answer search queries." : "Valitse sovellus, jota käytetään sisällön indeksointiin ja hakukyselyihin vastaamiseen.",
     "Navigation Icon" : "Valikon kuvake",
-    "Enable global search within all your content." : "Ota käyttöön globaali haku sisällöstäsi."
+    "Enable global search within all your content." : "Ota käyttöön globaali haku sisällöstäsi.",
+    "Error" : "Virhe",
+    "Searching …" : "Haetaan …",
+    "No results" : "Ei tuloksia",
+    "Previous page" : "Edellinen sivu",
+    "Next page" : "Seuraava sivu",
+    "the search returned {total} results in {time} ms" : "haku palautti {total} tulosta ajassa {time} ms",
+    "Search on %s" : "Etsi kohteesta %s",
+    "Select the app to index content and answer search queries." : "Valitse sovellus, jota käytetään sisällön indeksointiin ja hakukyselyihin vastaamiseen."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

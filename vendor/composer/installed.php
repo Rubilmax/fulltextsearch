@@ -3,7 +3,7 @@
         'name' => 'nextcloud/fulltextsearch',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '5fd89c70fc24a6f5e4d0db5e44f900f306760a32',
+        'reference' => '2992b04717c757fbf7b32db7ee580c6cc8b3a9e1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'nextcloud/fulltextsearch' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '5fd89c70fc24a6f5e4d0db5e44f900f306760a32',
+            'reference' => '2992b04717c757fbf7b32db7ee580c6cc8b3a9e1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -4,7 +4,9 @@ OC.L10N.register(
     "Search" : "ძიება",
     "Index not found" : "ინდექსი ვერ იქნა ნაპოვნი",
     "Full text search" : "სრული ტექსტის ძიება",
-    "Search on %s" : "ძიება %s-ზე",
-    "General" : "ზოგადი"
+    "General" : "ზოგადი",
+    "Error" : "შეცდომა",
+    "No results" : "შედეგები არაა",
+    "Search on %s" : "ძიება %s-ზე"
 },
 "nplurals=2; plural=(n!=1);");

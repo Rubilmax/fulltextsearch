@@ -2,19 +2,7 @@
   "name": "nextcloud/fulltextsearch",
   "description": "Full text search framework for Nextcloud",
   "minimum-stability": "stable",
-  "license": "AGPL-3.0-or-later",
-  "config": {
-    "optimize-autoloader": true,
-    "classmap-authoritative": true,
-    "autoloader-suffix": "FullTextSearch",
-    "allow-plugins": {
-      "composer/package-versions-deprecated": true,
-      "bamarni/composer-bin-plugin": true
-    },
-    "platform": {
-      "php": "8.2"
-    }
-  },
+  "license": "agpl",
   "authors": [
     {
       "name": "Maxence Lange",
@@ -28,17 +16,27 @@
     "post-install-cmd": [
       "@composer bin all install --ansi"
     ],
-    "phpstan": "phpstan analyse -c phpstan.neon --memory-limit=1G"
+    "test:unit": "phpunit -c tests/phpunit.xml",
+	"test:unit:coverage": "XDEBUG_MODE=coverage phpunit -c tests/phpunit.xml",
+    "cs:check": "php-cs-fixer fix --dry-run --diff",
+    "cs:fix": "php-cs-fixer fix",
+    "phpstan": "phpstan analyse -c phpstan.neon"
   },
   "autoload": {
     "psr-4": {
       "OCA\\FullTextSearch\\": "lib/"
     }
   },
-  "extra": {
-    "bamarni-bin": {
-      "bin-links": true,
-      "forward-command": false
+  "config": {
+    "optimize-autoloader": true,
+    "classmap-authoritative": true,
+    "autoloader-suffix": "FullTextSearch",
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "bamarni/composer-bin-plugin": true
+    },
+    "platform": {
+      "php": "8.2"
     }
   }
 }

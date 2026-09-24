@@ -10,9 +10,7 @@ declare(strict_types=1);
 namespace OCA\FullTextSearch\Service;
 
 use Exception;
-use OC;
 use OC\FullTextSearch\Model\DocumentAccess;
-use OC\User\NoUserException;
 use OCA\Circles\CirclesManager;
 use OCA\Circles\Model\Circle;
 use OCA\FullTextSearch\Exceptions\EmptySearchException;
@@ -28,6 +26,7 @@ use OCP\FullTextSearch\Service\ISearchService;
 use OCP\IGroupManager;
 use OCP\IUser;
 use OCP\IUserManager;
+use OCP\User\Exceptions\UserNotFoundException;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -69,7 +68,7 @@ class SearchService implements ISearchService {
 
 		$user = $this->userManager->get($userId);
 		if ($user === null) {
-			throw new NoUserException('User does not exist');
+			throw new UserNotFoundException('User does not exist');
 		}
 
 		/** @var SearchRequest $searchRequest */
@@ -111,17 +110,14 @@ class SearchService implements ISearchService {
 		IFullTextSearchPlatform $platform,
 		array $providers,
 		IDocumentAccess $access,
-		SearchRequest $request
+		SearchRequest $request,
 	): array {
 		$result = [];
 		foreach ($providers as $provider) {
 			try {
 				$provider->improveSearchRequest($request);
 			} catch (Throwable $e) {
-				$this->logger->warning(
-					'Issue while improving search request for Provider: ' . $provider->getId(),
-					['exception' => $e]
-				);
+				$this->logger->warning('Issue while improving search request for Provider: ' . $provider->getId(), ['exception' => $e]);
 				continue;
 			}
 
@@ -133,10 +129,7 @@ class SearchService implements ISearchService {
 			try {
 				$provider->improveSearchResult($searchResult);
 			} catch (Throwable $e) {
-				$this->logger->warning(
-					'Issue while improving search result for Provider: ' . $provider->getId(),
-					['exception' => $e]
-				);
+				$this->logger->warning('Issue while improving search result for Provider: ' . $provider->getId(), ['exception' => $e]);
 			}
 
 			$result[] = $searchResult;

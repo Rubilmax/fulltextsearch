@@ -4,6 +4,12 @@
 -->
 # Changelog
 
+### 35.0.0
+
+- merge upstream Nextcloud 35 support, including Symfony Console 7 and database API changes
+- bundle the Vue 3 search and settings assets for direct submodule installation
+- preserve provider error isolation and validate the `fulltextsearch:test` delay option
+
 ### 34.0.0
 
 - compat nc34 and newer releases

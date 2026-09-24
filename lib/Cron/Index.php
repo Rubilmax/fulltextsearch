@@ -14,21 +14,20 @@ use OCA\FullTextSearch\ConfigLexicon;
 use OCA\FullTextSearch\Exceptions\PlatformTemporaryException;
 use OCA\FullTextSearch\Exceptions\RunnerAlreadyUpException;
 use OCA\FullTextSearch\Model\Runner;
-use OCA\FullTextSearch\Service\ConfigService;
 use OCA\FullTextSearch\Service\IndexService;
 use OCA\FullTextSearch\Service\PlatformService;
 use OCA\FullTextSearch\Service\ProviderService;
 use OCA\FullTextSearch\Service\RunningService;
-use OCP\AppFramework\QueryException;
 use OCP\AppFramework\Services\IAppConfig;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJob;
 use OCP\BackgroundJob\TimedJob;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
 class Index extends TimedJob {
-	const HOUR_ERR_RESET = 240;
+	public const HOUR_ERR_RESET = 240;
 
 	private Runner $runner;
 
@@ -50,7 +49,7 @@ class Index extends TimedJob {
 	/**
 	 * @param mixed $argument
 	 *
-	 * @throws QueryException
+	 * @throws ContainerExceptionInterface
 	 */
 	protected function run($argument) {
 		$this->runner = new Runner($this->runningService, 'cronIndex');

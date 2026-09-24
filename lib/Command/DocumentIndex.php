@@ -10,60 +10,61 @@ declare(strict_types=1);
 namespace OCA\FullTextSearch\Command;
 
 use Exception;
-use OC\Core\Command\Base;
+use OCA\FullTextSearch\Exceptions\IndexDoesNotExistException;
 use OCA\FullTextSearch\Model\Index;
+use OCA\FullTextSearch\Service\IndexService;
 use OCA\FullTextSearch\Service\PlatformService;
 use OCA\FullTextSearch\Service\ProviderService;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use OCP\Console\Attribute\Argument;
+use OCP\Console\Attribute\AsCommand;
+use OCP\Console\Attribute\Option;
+use OCP\Console\ExitCode;
+use OCP\Console\IOutput;
 
-class DocumentIndex extends Base {
+#[AsCommand(
+	name: 'fulltextsearch:document:index',
+	description: 'index one specific document',
+)]
+class DocumentIndex {
 	public function __construct(
 		private ProviderService $providerService,
-		private PlatformService $platformService
+		private PlatformService $platformService,
+		private IndexService $indexService,
 	) {
-		parent::__construct();
-	}
-
-
-	/**
-	 *
-	 */
-	protected function configure() {
-		parent::configure();
-		$this->setName('fulltextsearch:document:index')
-			 ->setDescription('index one specific document')
-			 ->addArgument('userId', InputArgument::REQUIRED, 'userId')
-			 ->addArgument('providerId', InputArgument::REQUIRED, 'providerId')
-			 ->addArgument('documentId', InputArgument::REQUIRED, 'documentId');
 	}
 
 	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 *
-	 * @return int
 	 * @throws Exception
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$providerId = $input->getArgument('providerId');
-		$documentId = $input->getArgument('documentId');
-		$userId = $input->getArgument('userId');
-
+	public function __invoke(
+		IOutput $output,
+		#[Argument(description: 'userId')]
+		string $userId,
+		#[Argument(description: 'providerId')]
+		string $providerId,
+		#[Argument(description: 'documentId')]
+		string $documentId,
+		#[Option(description: 'collection to look the existing index up in, defaults to the internal collection')]
+		string $collection = '',
+	): ExitCode {
 		$providerWrapper = $this->providerService->getProvider($providerId);
 		$provider = $providerWrapper->getProvider();
 
 		$index = new Index($providerId, $documentId);
 		$index->setOwnerId($userId);
 		$index->setStatus(Index::INDEX_FULL);
+		try {
+			$index = $this->indexService->getIndex($providerId, $documentId, $collection);
+		} catch (IndexDoesNotExistException $e) {
+			$output->writeln('<error>Index not found: index attributes have been set to default values</error>');
+		}
 		$indexDocument = $provider->updateDocument($index);
 		if (!$indexDocument->hasIndex()) {
 			$indexDocument->setIndex($index);
 		}
 
 		if ($indexDocument->getIndex()
-						  ->isStatus(Index::INDEX_REMOVE)) {
+			->isStatus(Index::INDEX_REMOVE)) {
 			throw new Exception('Unknown document');
 		}
 
@@ -71,14 +72,11 @@ class DocumentIndex extends Base {
 		$platform = $platformWrapper->getPlatform();
 
 		$indexDocument->getIndex()
-					  ->setStatus(Index::INDEX_FULL);
+			->setStatus(Index::INDEX_FULL);
 		$platform->indexDocument($indexDocument);
 
-		return 0;
+		return ExitCode::Success;
 	}
 
 
 }
-
-
-

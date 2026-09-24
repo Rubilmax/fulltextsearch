@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace OCA\FullTextSearch\AppInfo;
 
-
 use Closure;
 use OCA\FullTextSearch\Capabilities;
 use OCA\FullTextSearch\ConfigLexicon;
@@ -17,7 +16,6 @@ use OCA\FullTextSearch\Search\UnifiedSearchProvider;
 use OCA\FullTextSearch\Service\IndexService;
 use OCA\FullTextSearch\Service\ProviderService;
 use OCA\FullTextSearch\Service\SearchService;
-use OCA\FullTextSearch\Settings\Admin;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -36,8 +34,8 @@ if (file_exists($autoLoad = __DIR__ . '/../../vendor/autoload.php')) {
 }
 
 class Application extends App implements IBootstrap {
-	const APP_ID = 'fulltextsearch';
-	const APP_NAME = 'FullTextSearch';
+	public const APP_ID = 'fulltextsearch';
+	public const APP_NAME = 'FullTextSearch';
 
 
 	/**
@@ -57,7 +55,6 @@ class Application extends App implements IBootstrap {
 		$context->registerCapability(Capabilities::class);
 		$context->registerSearchProvider(UnifiedSearchProvider::class);
 		$context->registerConfigLexicon(ConfigLexicon::class);
-		$context->registerDeclarativeSettings(Admin::class);
 		$this->registerServices($this->getContainer());
 	}
 
@@ -95,7 +92,7 @@ class Application extends App implements IBootstrap {
 		IAppConfig $appConfig,
 		INavigationManager $navigationManager,
 		IURLGenerator $urlGen,
-		IFactory $l10nFactory
+		IFactory $l10nFactory,
 	): void {
 		if (!$appConfig->getValueBool(self::APP_ID, ConfigLexicon::APP_NAVIGATION)) {
 			return;
@@ -106,7 +103,7 @@ class Application extends App implements IBootstrap {
 				fn () => $this->fullTextSearchNavigation($urlGen, $l10nFactory)
 			);
 		} catch (RouteNotFoundException) {
-            // Navigation route not found, do not add navigation entry
+			// Navigation route not found, do not add navigation entry
 		}
 	}
 
@@ -116,11 +113,11 @@ class Application extends App implements IBootstrap {
 	 */
 	private function fullTextSearchNavigation(IURLGenerator $urlGen, IFactory $l10nFactory): array {
 		return [
-			'id'    => self::APP_ID,
+			'id' => self::APP_ID,
 			'order' => 5,
-			'href'  => $urlGen->linkToRoute(self::APP_ID . '.Navigation.navigate'),
-			'icon'  => $urlGen->imagePath(self::APP_ID, 'fulltextsearch.svg'),
-			'name'  => $l10nFactory->get(self::APP_ID)->t('Search')
+			'href' => $urlGen->linkToRoute(self::APP_ID . '.Navigation.navigate'),
+			'icon' => $urlGen->imagePath(self::APP_ID, 'fulltextsearch.svg'),
+			'name' => $l10nFactory->get(self::APP_ID)->t('Search')
 		];
 	}
 }
