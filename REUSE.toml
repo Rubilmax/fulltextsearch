@@ -76,3 +76,18 @@ path = ["js/jquery-3.7.1.min.js", "js/jquery-3.7.1.min.map"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "OpenJS Foundation and other contributors"
 SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "css/*.css"
+SPDX-FileCopyrightText = "Nextcloud GmbH and Nextcloud contributors"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = ["vendor/autoload.php", "vendor/composer/**"]
+SPDX-FileCopyrightText = "Nils Adermann and Jordi Boggiano"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "vendor/bamarni/composer-bin-plugin/**"
+SPDX-FileCopyrightText = "2016 Bilal Amarni"
+SPDX-License-Identifier = "MIT"
