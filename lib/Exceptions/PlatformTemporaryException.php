@@ -11,8 +11,5 @@ namespace OCA\FullTextSearch\Exceptions;
 
 use Exception;
 
-/**
- * @deprecated - nc28 use \OCP\FullTextSearch\Exceptions\PlatformTemporaryException
- */
 class PlatformTemporaryException extends Exception {
 }
